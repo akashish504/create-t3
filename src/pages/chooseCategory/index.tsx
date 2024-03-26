@@ -7,7 +7,7 @@ export default function MultiSelectCheckbox() {
   const itemsPerPage = 6;
   // Dummy data for demonstration
   // const allItems: string[] = Array.from({ length: 100 }, (_, index) => `Item ${index + 1}`);
-	const allItems: string[] = Array.from({ length: 100 }, (_, index) => categories.list[index]);
+	const allItems: any[] = Array.from({ length: 100 }, (_, index) => categories.list[index]);
   // Pagination calculation
   const totalPages: number = Math.ceil(allItems.length / itemsPerPage);
   const startIndex: number = (currentPage - 1) * itemsPerPage;
