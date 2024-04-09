@@ -11,23 +11,25 @@ export default function SignUp() {
       password: ''
     });
   
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
     const signUp = api.user.signUp.useMutation();
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       // Handle form submission, e.g., send data to server
       console.log(formData);
       /**
        * Represents the user object returned from the signUp API mutation.
        */
-      const user = await signUp.mutate(formData);
+      const user = signUp.mutate(formData);
       console.log(user)
       // Reset form fields
       router.push({
         pathname: '/verify',
         query: { email: formData.email },
+      }).catch((error) => {
+        console.error('Error navigating to verify page:', error);
       });
       // setFormData({
       //   name: '',

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { api } from "~/utils/api";
-import { string } from 'zod';
 
 
 export default function AccountVerification () {
@@ -26,7 +25,7 @@ export default function AccountVerification () {
         // Check if OTP is valid (replace with actual verification logic)
 
         if (otp === "12345678") {
-            const response = await verify.mutate({ email: email as string, otp: Number(otp) as number });
+            verify.mutate({ email: String(email), otp: Number(otp)});
             setVerificationStatus('Verification successful!');
         } else {
             setVerificationStatus('Invalid OTP. Please try again.');
@@ -59,10 +58,10 @@ export default function AccountVerification () {
 };
 
 // Function to simulate sending OTP to email (replace with actual API call)
-const sendOtpToEmail = async (email: string) => {
-  // Simulate API call delay
-  // await new Promise(resolve => setTimeout(resolve, 1000));
-  // Replace with actual API call to send OTP to email
-  return { otp: '123456' }; // Simulated OTP
-};
+// const sendOtpToEmail = async (email: string) => {
+//   // Simulate API call delay
+//   // await new Promise(resolve => setTimeout(resolve, 1000));
+//   // Replace with actual API call to send OTP to email
+//   return { otp: '123456' }; // Simulated OTP
+// };
 

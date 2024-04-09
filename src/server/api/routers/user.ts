@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 // import { faker } from '@faker-js/faker';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -94,7 +94,7 @@ export const userRouter =  createTRPCRouter({
     //         }
 	// 	}),	
     categories: publicProcedure
-        .query(async ({ ctx,input }) => {
+        .query(async ({ ctx }) => {
 
             // need to add some pagination logic with input and page number
 
