@@ -11,11 +11,11 @@ export default function SignUp() {
       password: ''
     });
   
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
     const signUp = api.user.signUp.useMutation();
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
       e.preventDefault();
       // Handle form submission, e.g., send data to server
       console.log(formData);

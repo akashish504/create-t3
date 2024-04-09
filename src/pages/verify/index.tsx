@@ -12,7 +12,7 @@ export default function AccountVerification () {
   const router = useRouter();
   const { email } = router.query;
 
-  const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
     setOtp(e.target.value);
   };
 
@@ -61,7 +61,7 @@ export default function AccountVerification () {
 // Function to simulate sending OTP to email (replace with actual API call)
 const sendOtpToEmail = async (email: string) => {
   // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // await new Promise(resolve => setTimeout(resolve, 1000));
   // Replace with actual API call to send OTP to email
   return { otp: '123456' }; // Simulated OTP
 };
