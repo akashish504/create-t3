@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import React ,{ useState } from 'react';
+import { api } from "~/utils/api";
+import { useRouter } from 'next/router';
 
 interface SignInFormData {
-  username: string;
+  email: string;
   password: string;
 }
 
 export default function SignIn() {
   const [formData, setFormData] = useState<SignInFormData>({
-    username: '',
+    email: '',
     password: ''
   });
+
+	const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -18,9 +22,15 @@ export default function SignIn() {
       [name]: value
     }));
   };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const signIn = api.user.signIn.useMutation();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+		signIn.mutate(formData);
+		router.push({
+			pathname: '/chooseCategory'
+		}).catch((error) => {
+			console.error('Error navigating to verify page:', error);
+		});
     // Here you can handle form submission, e.g., sending data to server
     console.log(formData);
   };
@@ -30,12 +40,12 @@ export default function SignIn() {
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
           />

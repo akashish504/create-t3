@@ -67,32 +67,39 @@ export const userRouter =  createTRPCRouter({
 
         }),
 
-	// signIn: publicProcedure
-    //     .input(z.object({
-    //         email: z.string().email(),
-    //         password: z.string(),
-    //     }))
-	// 	.mutation(({ ctx, input }) => {
-    //         const user = ctx.db.user.findFirst({
-    //             where: {
-	// 				email: input.email,
-	// 			},
-	// 		});
-    //         if (!user){
-    //             return {
-    //                 "error": `User does not exists, retry again`,
-    //             };
-    //         }
-    //         if (user.password != input.password){
-    //             return {
-    //                 "error": `Invalid password, retry again`,
-    //             };
-    //         }
-    //         //user some user authenciation logic, maybe jwt
-	// 		return {
-    //             "Success": "user authenticated successfully"
-    //         }
-	// 	}),	
+	signIn: publicProcedure
+        .input(z.object({
+            email: z.string().email(),
+            password: z.string(),
+        }))
+		.output(z.object({
+			status: z.string(),
+			message: z.string()
+		}))
+		.mutation( async({ ctx, input }) => {
+            const user = await ctx.db.user.findFirst({
+                where: {
+					email: input.email,
+				},
+			});
+            if (!user){
+                return {
+					"status": "error",
+                    "message": `User does not exists, retry again`,
+                };
+            }
+            if (user.password != input.password){
+                return {
+					"status": "error",	
+                    "message": `Invalid password, retry again`,
+                };
+            }
+            //user some user authenciation logic, maybe jwt
+			return {
+				"status": "success",
+                "message": "user authenticated successfully"
+            }
+		}),	
     categories: publicProcedure
         .query(async ({ ctx }) => {
 

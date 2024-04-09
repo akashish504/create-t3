@@ -27,6 +27,11 @@ export default function AccountVerification () {
         if (otp === "12345678") {
             verify.mutate({ email: String(email), otp: Number(otp)});
             setVerificationStatus('Verification successful!');
+            router.push({
+              pathname: '/chooseCategory'
+            }).catch((error) => {
+              console.error('Error navigating to verify page:', error);
+            });
         } else {
             setVerificationStatus('Invalid OTP. Please try again.');
         }
