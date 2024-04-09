@@ -67,32 +67,32 @@ export const userRouter =  createTRPCRouter({
 
         }),
 
-	signIn: publicProcedure
-        .input(z.object({
-            email: z.string().email(),
-            password: z.string(),
-        }))
-		.mutation(({ ctx, input }) => {
-            const user = ctx.db.user.findFirst({
-                where: {
-					email: input.email,
-				},
-			});
-            if (!user){
-                return {
-                    "error": `User does not exists, retry again`,
-                };
-            }
-            if (user.password !== input.password){
-                return {
-                    "error": `Invalid password, retry again`,
-                };
-            }
-            //user some user authenciation logic, maybe jwt
-			return {
-                "Success": "user authenticated successfully"
-            }
-		}),	
+	// signIn: publicProcedure
+    //     .input(z.object({
+    //         email: z.string().email(),
+    //         password: z.string(),
+    //     }))
+	// 	.mutation(({ ctx, input }) => {
+    //         const user = ctx.db.user.findFirst({
+    //             where: {
+	// 				email: input.email,
+	// 			},
+	// 		});
+    //         if (!user){
+    //             return {
+    //                 "error": `User does not exists, retry again`,
+    //             };
+    //         }
+    //         if (user.password != input.password){
+    //             return {
+    //                 "error": `Invalid password, retry again`,
+    //             };
+    //         }
+    //         //user some user authenciation logic, maybe jwt
+	// 		return {
+    //             "Success": "user authenticated successfully"
+    //         }
+	// 	}),	
     categories: publicProcedure
         .query(async ({ ctx,input }) => {
 
