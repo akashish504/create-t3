@@ -2,7 +2,10 @@ export default function Home() {
 
   return (
     <>
-      Checkout /signUp
+      <div>Checkout /signUp </div>
+      <div>Checkout /verify</div>
+      <div>Checkout /signIn</div>
+      <div>Checkout /chooseCategory</div>
     </>
   );
 }
